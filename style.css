@@ -1,0 +1,498 @@
+/* ==========================================================================
+   1. HIGH-END LUXURY DESIGN TOKENS & BASE CONFIG
+   ========================================================================== */
+:root {
+    --brand-dark: #121212;        /* Deep Premium Black */
+    --brand-ash: #2D2D2D;         /* Smoked Ash Gray */
+    --brand-beige: #D4B996;       /* Desert Sand Beige */
+    --brand-white: #F9F9F9;       /* Crisp Off-White */
+    --text-muted: #8E8E8E;        /* Industrial Gray */
+    
+    --heading-font: 'Syne', sans-serif;
+    --body-font: 'Inter', sans-serif;
+    --transition-premium: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--body-font);
+    background-color: var(--brand-dark);
+    color: var(--brand-white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   2. MINIMALIST HEADER INTERFACE
+   ========================================================================== */
+.brand-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: rgba(18, 18, 18, 0.80);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-logo {
+    font-family: var(--heading-font);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--brand-white);
+    text-decoration: none;
+}
+
+/* FIXED EXPLICIT LINK DESIGN MAP (Prevents Purple Visited Bug) */
+.brand-nav a.nav-collection-link,
+.brand-nav a.nav-collection-link:visited,
+.brand-nav a.nav-collection-link:active {
+    color: var(--brand-white) !important;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-right: 2.5rem;
+    transition: var(--transition-premium);
+}
+
+.brand-nav a.nav-collection-link:hover {
+    color: var(--brand-beige) !important;
+}
+
+.brand-nav .cart-status {
+    color: var(--brand-white);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    transition: var(--transition-premium);
+    cursor: pointer;
+}
+
+.brand-nav .cart-status:hover {
+    background-color: var(--brand-white);
+    color: var(--brand-dark);
+    border-color: var(--brand-white);
+}
+
+/* ==========================================================================
+   3. PREMIUM SLIDE-OUT CART PANEL STYLING
+   ========================================================================== */
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    display: none;
+}
+
+.cart-panel {
+    position: absolute;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100%;
+    background-color: var(--brand-dark);
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-premium);
+}
+
+.cart-overlay.active {
+    display: block;
+}
+
+.cart-overlay.active .cart-panel {
+    right: 0;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.cart-header h3 {
+    font-family: var(--heading-font);
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.close-cart-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: var(--body-font);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--transition-premium);
+}
+
+.close-cart-btn:hover {
+    color: var(--brand-white);
+}
+
+.cart-items-container {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.empty-message {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.cart-item-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.cart-item-price {
+    color: var(--brand-beige);
+    font-family: var(--heading-font);
+    font-size: 0.9rem;
+}
+
+/* CUSTOM REMOVE INTERACTIVE TRIGGER BUTTON (NEW) */
+.remove-item-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: var(--transition-premium);
+}
+
+.remove-item-btn:hover {
+    color: #EF4444; /* Premium crimson alert flash indicator on delete hover */
+    transform: scale(1.15);
+}
+
+.cart-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 1.5rem;
+}
+
+.checkout-btn {
+    width: 100%;
+    background-color: var(--brand-white);
+    color: var(--brand-dark);
+    border: none;
+    padding: 1rem;
+    font-family: var(--body-font);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--transition-premium);
+}
+
+.checkout-btn:hover {
+    background-color: var(--brand-beige);
+}
+
+/* ==========================================================================
+   4. HERO STUDIO SCREEN DISPLAY
+   ========================================================================== */
+.hero-display {
+    position: relative;
+    height: 90vh;
+    background: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=1600') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.hero-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(18, 18, 18, 0.9) 30%, rgba(18, 18, 18, 0.3));
+    z-index: 1;
+}
+
+.hero-wrapper {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 2;
+}
+
+.drop-tag {
+    font-family: var(--heading-font);
+    font-size: 0.9rem;
+    color: var(--brand-beige);
+    letter-spacing: 3px;
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.hero-display h1 {
+    font-family: var(--heading-font);
+    font-size: 4rem;
+    line-height: 1.1;
+    font-weight: 800;
+    max-width: 800px;
+    letter-spacing: -2px;
+    margin-bottom: 1.5rem;
+}
+
+.hero-display p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 500px;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+}
+
+.explore-btn {
+    display: inline-block;
+    color: var(--brand-white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    border-bottom: 2px solid var(--brand-beige);
+    padding-bottom: 0.5rem;
+    transition: var(--transition-premium);
+}
+
+.explore-btn:hover {
+    color: var(--brand-beige);
+    padding-left: 8px;
+}
+
+/* ==========================================================================
+   5. INTERACTIVE LOOKBOOK DESIGN SYSTEM
+   ========================================================================== */
+.lookbook-section {
+    padding: 8rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.lookbook-header {
+    margin-bottom: 5rem;
+}
+
+.lookbook-header h2 {
+    font-family: var(--heading-font);
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+}
+
+.lookbook-header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.lookbook-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+}
+
+.product-card {
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    transition: var(--transition-premium);
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    background-color: var(--brand-ash);
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%);
+    transition: var(--transition-premium);
+}
+
+.hover-overlay-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 18, 18, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: var(--transition-premium);
+}
+
+.view-spec {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid var(--brand-white);
+    padding: 0.6rem 1.2rem;
+    transform: translateY(15px);
+    transition: var(--transition-premium);
+}
+
+.product-card:hover .image-wrapper img {
+    transform: scale(1.08);
+    filter: grayscale(0%);
+}
+
+.product-card:hover .hover-overlay-details {
+    opacity: 1;
+}
+
+.product-card:hover .view-spec {
+    transform: translateY(0);
+}
+
+.product-meta {
+    padding: 1.5rem;
+}
+
+.title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.25rem;
+}
+
+.product-meta h3 {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--brand-white);
+}
+
+.price {
+    font-family: var(--heading-font);
+    font-weight: 600;
+    color: var(--brand-beige);
+}
+
+.color-spec {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.add-bag-btn {
+    width: 100%;
+    background-color: transparent;
+    color: var(--brand-white);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.8rem;
+    font-family: var(--body-font);
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--transition-premium);
+}
+
+.add-bag-btn:hover {
+    background-color: var(--brand-white);
+    color: var(--brand-dark);
+    border-color: var(--brand-white);
+}
+
+/* ==========================================================================
+   6. FOOTER & MEDIA QUERIES
+   ========================================================================== */
+.luxury-footer {
+    text-align: center;
+    padding: 4rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 1024px) {
+    .hero-display h1 {
+        font-size: 3rem;
+    }
+    .lookbook-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .brand-nav {
+        display: none;
+    }
+    .cart-panel {
+        width: 100%;
+        right: -100%;
+    }
+    .hero-display h1 {
+        font-size: 2.25rem;
+    }
+    .lookbook-grid {
+        grid-template-columns: 1fr;
+    }
+    .image-wrapper {
+        height: 380px;
+    }
+}

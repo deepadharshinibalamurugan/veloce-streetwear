@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veloce Urban Essentials | Premium Custom Apparel Drop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="brand-header">
+        <div class="header-container">
+            <a href="#" class="brand-logo">VELOCE</a>
+            <nav class="brand-nav">
+                <a href="#collection" class="nav-collection-link">Collection</a>
+                <a href="javascript:void(0)" class="cart-status" onclick="toggleCart()">Bag (0)</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="cart-overlay" id="cartOverlay">
+        <div class="cart-panel">
+            <div class="cart-header">
+                <h3>YOUR BAG</h3>
+                <button class="close-cart-btn" onclick="toggleCart()">CLOSE ✕</button>
+            </div>
+            <div class="cart-items-container" id="cartItemsList">
+                <p class="empty-message">Your bag is currently empty.</p>
+            </div>
+            <div class="cart-footer">
+                <button class="checkout-btn" onclick="alert('Proceeding to Checkout...')">PROCEED TO CHECKOUT</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero-display">
+        <div class="hero-bg-overlay"></div>
+        <div class="hero-wrapper">
+            <span class="drop-tag">LIMITED DROP // URBAN ESSENTIALS</span>
+            <h1>ORGANIC COTTON APPAREL ARCHITECTURE.</h1>
+            <p>A minimalist study of modern structural forms, engineered for high-end lifestyle aesthetic stability.</p>
+            <a href="#collection" class="explore-btn">Explore the Lookbook ↓</a>
+        </div>
+    </section>
+
+    <section id="collection" class="lookbook-section">
+        <div class="lookbook-header">
+            <h2>THE ESSENTIAL TRIO</h2>
+            <p>Every piece is strictly custom dyed, optimized with premium fabric weights, and structured natively.</p>
+        </div>
+
+        <div class="lookbook-grid">
+            <div class="product-card">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=600" 
+                         alt="Veloce Oversized Hoodie" 
+                         loading="lazy">
+                    <div class="hover-overlay-details">
+                        <span class="view-spec">450 GSM Heavy French Terry</span>
+                    </div>
+                </div>
+                <div class="product-meta">
+                    <div class="title-row">
+                        <h3>Veloce Oversized Hoodie</h3>
+                        <span class="price">$150</span>
+                    </div>
+                    <p class="color-spec">Smoked Ash Gray</p>
+                    <button class="add-bag-btn">Add to Bag</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&q=80&w=600" 
+                         alt="Minimalist Cargo Joggers" 
+                         loading="lazy">
+                    <div class="hover-overlay-details">
+                        <span class="view-spec">Encased Elastic Waistband</span>
+                    </div>
+                </div>
+                <div class="product-meta">
+                    <div class="title-row">
+                        <h3>Minimalist Cargo Joggers</h3>
+                        <span class="price">$120</span>
+                    </div>
+                    <p class="color-spec">Desert Sand Beige</p>
+                    <button class="add-bag-btn">Add to Bag</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=600" 
+                         alt="Signature Graphic Tee" 
+                         loading="lazy">
+                    <div class="hover-overlay-details">
+                        <span class="view-spec">100% Organic Raw Combed Cotton</span>
+                    </div>
+                </div>
+                <div class="product-meta">
+                    <div class="title-row">
+                        <h3>Signature Graphic Tee</h3>
+                        <span class="price">$65</span>
+                    </div>
+                    <p class="color-spec">Off-White Organic Cotton</p>
+                    <button class="add-bag-btn">Add to Bag</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="luxury-footer">
+        <p>&copy; 2026 VELOCE STUDIO INC. LONDON. PERFORMANCE CUSTOM VISUALS.</p>
+    </footer>
+
+    <script>
+        let bagCount = 0;
+        let selectedItems = [];
+
+        const cartStatusElement = document.querySelector('.cart-status');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartItemsList = document.getElementById('cartItemsList');
+
+        // Toggle Cart Panel (Open/Close)
+        function toggleCart() {
+            cartOverlay.classList.toggle('active');
+        }
+
+        // Close cart when clicking outside the panel
+        cartOverlay.addEventListener('click', function(e) {
+            if (e.target === cartOverlay) toggleCart();
+        });
+
+        // Add to Cart Functionality
+        function addToCart(event) {
+            bagCount++;
+            cartStatusElement.textContent = `Bag (${bagCount})`;
+
+            const productCard = event.target.closest('.product-card');
+            const title = productCard.querySelector('h3').textContent;
+            const price = productCard.querySelector('.price').textContent;
+
+            selectedItems.push({ title, price });
+            renderCartItems();
+
+            // Premium button interaction color flash
+            cartStatusElement.style.color = 'var(--brand-beige)';
+            cartStatusElement.style.borderColor = 'var(--brand-beige)';
+            setTimeout(() => {
+                cartStatusElement.style.color = 'var(--brand-white)';
+                cartStatusElement.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+            }, 800);
+        }
+
+        // Remove Item from Cart Functionality (NEW FIXED METHOD)
+        function removeFromCart(index) {
+            selectedItems.splice(index, 1); // Removes 1 specific object via index array mapping
+            bagCount--;
+            cartStatusElement.textContent = `Bag (${bagCount})`;
+            renderCartItems();
+        }
+
+        // Render Cart Items List dynamically
+        function renderCartItems() {
+            if (selectedItems.length === 0) {
+                cartItemsList.innerHTML = '<p class="empty-message">Your bag is currently empty.</p>';
+                return;
+            }
+
+            // Injected dynamic template literals with direct single item index handling
+            cartItemsList.innerHTML = selectedItems.map((item, index) => `
+                <div class="cart-item">
+                    <div class="item-info">
+                        <div class="cart-item-title">${item.title}</div>
+                        <div class="cart-item-price">${item.price}</div>
+                    </div>
+                    <button class="remove-item-btn" onclick="removeFromCart(${index})">✕</button>
+                </div>
+            `).join('');
+        }
+
+        // Event Binding
+        document.querySelectorAll('.add-bag-btn').forEach(button => {
+            button.addEventListener('click', addToCart);
+        });
+    </script>
+</body>
+</html>
